@@ -187,3 +187,8 @@ LOGGING = {
 }
 
 COUNTDOWN_START = 10
+
+try:
+    from settings_local import *
+except ImportError:
+    pass
