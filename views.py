@@ -65,7 +65,7 @@ def about(request):
 
 def displaygems(request):
 
-    items = Item.objects.filter(active=True,price__isnull=False,num_views__gt=0).extra(select={ 'rating' : 'num_likes / num_views' }).order_by('-rating')[:10]
+    items = Item.objects.filter(active=True,price__isnull=False,num_views__gt=0,num_likes__gt=0).extra(select={ 'rating' : 'num_likes / num_views' }).order_by('-rating')[:10]
     c = RequestContext(request, {'items':items}, [])
 
     return render_to_response('displaygems.html', c)
