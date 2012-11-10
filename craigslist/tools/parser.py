@@ -5,6 +5,7 @@ import re
 import dateutil.parser
 
 RE_PRICE = re.compile(r'\$(\d+)')
+RE_EMAIL = re.compile(r'.+@.+\..+')
 
 def parse_url(url):
     r = requests.get(url, timeout=2, headers={'User-Agent' : 'Mozilla/5.0 (MSIE 9.0; Windows NT 6.1; Trident/5.0)'} )
@@ -29,6 +30,12 @@ def parse_url(url):
         post_datetime = post_datetime.replace(tzinfo=None)
         print 'Post Datetime: %s' % post_datetime
 
+        seller_email = None
+        for small_tag in soup.find('small'):
+            if RE_EMAIL.search(small_tag.text):
+                seller_email = small_tag.text
+        print 'Seller email: %s' % str(seller_email)
+
         try: # Multiple images
             images = [ img['src'].replace('thumb/','') for img in soup.find('div', {'id': 'iwt'}).findAll('img') ]
         except:
@@ -45,6 +52,7 @@ def parse_url(url):
             'sell_price' : price,
             'description' : description,
             'images' : images,
+            'seller_email' : seller_email,
         }
     else:
         print 'Error getting %s: %s' % (url, str(r.status_code))
@@ -53,6 +61,7 @@ def parse_url(url):
 
 if __name__ == "__main__":
     urls = ['http://newyork.craigslist.org/brk/fuo/3399953168.html',
+            'http://newyork.craigslist.org/brk/fuo/3399953168.html',
             'http://newyork.craigslist.org/mnh/fuo/3399952976.html', ]
 
     for url in urls:

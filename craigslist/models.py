@@ -16,6 +16,7 @@ class ItemManager(models.Manager):
                 item.description = data['description']
                 item.post_datetime = data['post_datetime']
                 item.price = data['sell_price']
+                item.seller_email = data['seller_email']
                 item.save()
                 ItemImage.objects.filter(item=item).delete()
             except Item.DoesNotExist:
@@ -24,6 +25,7 @@ class ItemManager(models.Manager):
                             description=data['description'],
                             post_datetime=data['post_datetime'],
                             price=data['sell_price'],
+                            seller_email=data['seller_email'],
                             )
                 item.save()
 
@@ -49,6 +51,7 @@ class Item(models.Model):
     num_views = models.IntegerField(null=False,default=0)
     num_likes = models.IntegerField(null=False,default=0)
     num_dislikes = models.IntegerField(null=False,default=0)
+    seller_email = models.EmailField(null=True,max_length=75)
 
     def first_image(self):
         return self.itemimage_set.all()[0]
