@@ -46,6 +46,8 @@ def parse_url(url):
             'description' : description,
             'images' : images,
         }
+    else:
+        print 'Error getting %s: %s' % (url, str(r.status_code))
 
     return None
 

@@ -1,11 +1,12 @@
 from django.db import models
+from tools import parser
 
 class ItemManager(models.Manager):
     def create_item(self, url):
         try:
-            data = craigslist.parse_url(url)
-        except:
-            print 'Could not get url %s' % url
+            data = parser.parse_url(url)
+        except Exception, e:
+            print 'Could not get url %s: %s' % (url, str(e))
             return None
 
         if data:
@@ -14,7 +15,7 @@ class ItemManager(models.Manager):
                 item.title = data['title']
                 item.description = data['description']
                 item.post_datetime = data['post_datetime']
-                item.sell_price = data['sell_price']
+                item.price = data['sell_price']
                 item.save()
                 ItemImage.objects.filter(item=item).delete()
             except Item.DoesNotExist:
@@ -22,7 +23,7 @@ class ItemManager(models.Manager):
                             title=data['title'],
                             description=data['description'],
                             post_datetime=data['post_datetime'],
-                            sell_price=data['sell_price'],
+                            price=data['sell_price'],
                             )
                 item.save()
 
