@@ -11,6 +11,20 @@
 {% endblock %}
 
 {% block body %}
+<div class="row-fluid">
+  <div class="span12">
+    <h2>Top 10 Gems</h2>
+    <p>Have them emailed to you daily.</p>
+    <form class="form-inline">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-envelope"></i></span>
+          <input class="span10" id="inputIcon" type="text">
+        </div>
+    <button type="submit" class="btn">Subscribe</button>
+    </form>
+  </div>
+</div>
+
 {% for item in items %}
 <div class="row-fluid item">
   <div class="span1">
