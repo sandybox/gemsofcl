@@ -33,8 +33,16 @@ def play(request):
             print 'Could note vote: %s' % str(e)
 
     item = Item.objects.filter(active=True,price__isnull=False).order_by('?')[1]
-    countdown = 10 # NEED TO REPLACE TO VAR STORED IN SESSION
-    c = RequestContext(request, {'item':item, 'countdown':countdown, }, [])
+
+    if request.session.get('countdown', False):
+        request.session['countdown'] = request.session['countdown'] - 1 # NEED TO REPLACE TO VAR STORED IN SESSION
+        print "%s hello" % (request.session['countdown'])
+    else:
+        request.session['countdown'] = 10
+        print "starting countdown at 10"
+
+
+    c = RequestContext(request, {'item':item,}, [])
     return render_to_response('play.html', c)
 
 def about(request):
