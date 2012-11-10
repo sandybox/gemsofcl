@@ -9,9 +9,7 @@ from craigslist.models import Item, ItemImage
 
 def home(request):
     c = RequestContext(request, {}, [])
-    return render_to_response('index.html',
-        {'base_site_url' : settings.BASE_SITE_URL,
-        'base_site_url_s' : settings.BASE_SITE_URL_S,}, c)
+    return render_to_response('index.html', {}, c)
 
 def play(request):
     # Check if this was a vote and track it
