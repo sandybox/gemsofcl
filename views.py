@@ -37,6 +37,9 @@ def play(request):
     if 'countdown' in request.session:
         request.session['countdown'] = request.session['countdown'] - 1 # NEED TO REPLACE TO VAR STORED IN SESSION
         print "%s hello" % (request.session['countdown'])
+        if request.session['countdown'] == 0:
+            request.session['message'] = 'Congratulations! You can now check out the Gems of Craigslist'
+            return redirect('displaygems')
     else:
         request.session['countdown'] = settings.COUNTDOWN_START
         print "starting countdown at %d" % settings.COUNTDOWN_START

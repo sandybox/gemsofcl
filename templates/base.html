@@ -29,15 +29,27 @@
     <hr>
     {% endblock %}
 
+    <div class="row-fluid">
+      <div class="span9">
+        {% if message %}<p>{{ message }}</p>{% endif %}
+        {% if alert %}<p>{{ alert }}</p>{% endif %}
+      </div>
+    </div>
+
     {% block body %}
     {% endblock %}
+
     {% block footer %}
     <footer class="footer">
+      <div class="row-fluid">
+        <div class="span12">
           <ul>
             <li style="display: inline;">&copy;2012 gems of craigslist</li>
             <li style="display: inline;">|</li>
             <li style="display: inline;">Lovingly crafted in NYC</li>
           </ul>
+        </div>
+      </div>
     </footer>
     {% endblock %}
   </div><!-- end of container -->
