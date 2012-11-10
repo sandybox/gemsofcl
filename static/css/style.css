@@ -1,0 +1,31 @@
+body {
+    background:url("../img/texturetastic_gray.png") 0 0 repeat
+}
+
+h1 {
+    color:#222;
+    font-family:"HelveticaNeue-CondensedBold", Helvetica, sans-serif;
+    font-size:48px;
+    margin:50px 0
+}
+
+h2 {
+    font-family:"HelveticaNeue-CondensedBold", Helvetica, sans-serif
+}
+
+h3 {
+    color:#555;
+    font-family:Georgia, serif;
+    font-size:15px;
+    font-weight:normal;
+    line-height:20px
+}
+
+p {
+    color:#777;
+    font-family:Georgia, serif;
+    font-size:15px;
+    font-weight:normal;
+    line-height:20px;
+    margin-bottom:20px
+}
