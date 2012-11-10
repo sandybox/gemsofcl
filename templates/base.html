@@ -28,6 +28,13 @@
     <hr>
     {% endblock %}
 
+    <div class="row-fluid">
+      <div class="span9">
+        {% if message %}<p>{{ message }}</p>{% endif %}
+        {% if alert %}<p>{{ alert }}</p>{% endif %}
+      </div>
+    </div>
+
     {% block body %}
     {% endblock %}
     {% block footer %}
