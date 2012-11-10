@@ -66,3 +66,39 @@ p {
 .footer {
     color: #999;
 }
+
+/* play page */
+
+.imageholder {
+    position: relative;
+    background-color: white;
+    padding: 15px;
+}
+
+.PriceContainer {
+    position: absolute;
+    z-index: 2;
+    top: 0px;
+    left: 0px;
+    width: 100px;
+    height: 110px;
+    overflow: hidden;
+}
+
+.price {
+    position: absolute;
+    z-index: 2;
+    top: 19px;
+    left: -28px;
+    width: 125px;
+    height: 25px;
+    padding-top: 8px;
+    text-align: center;
+    font-size: 14px;
+    background-color: #F2F0F0;
+    overflow: hidden;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+}
