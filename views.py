@@ -7,3 +7,7 @@ from django.shortcuts import redirect
 def home(request):
     c = RequestContext(request, {}, [])
     return render_to_response('index.html', c)
+
+def play(request):
+    c = RequestContext(request, {}, [])
+    return render_to_response('play.html', c)

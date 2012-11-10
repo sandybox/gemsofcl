@@ -1,16 +1,20 @@
 {% extends "./base.html" %}
 
-{% block title %}Gems of Craigslist{% endblock %}
+{% block title %}Gems of Craigslist - Spot a Gem!{% endblock %}
 
 {% block head %}
 <meta name="description" content="Discover the gems of cragislist.">
 {% endblock %}
 
 {% block body %}
-      <div class="jumbotron">
-        <h1>So, you wanna see the best stuff for sale around you?</h1>
-        <p class="lead">You gotta give to get. Spot ten diamonds or duds before seeing the real gems for sale on Craigslist today. Hurry before they're sold out!</p>
-        <a class="btn btn-large btn-success" href="play">Show me the Gems</a>
+      <div class="row-fluid">
+        <div class="span6">
+          <img src="{{ STATIC_URL }}img/mcm_orange_chair.jpg" />
+        </div>
+        <div class="span6">
+          <a class="btn btn-large btn-success" href="#">Gem</a>
+          <a class="btn btn-large btn-success" href="#">Dud</a>
+        </div>
       </div>
 
       <hr>
