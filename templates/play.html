@@ -30,16 +30,14 @@
 </div>
 
 <div class="row-fluid">
-  <div class="span9">
+  <div class="span12">
+    <h4>{{ item.title|trimtitle|safe }}&nbsp;&nbsp;<a href="{{ item.url }}" target="_blank"><img src="{{ STATIC_URL }}img/external_link.png" /></a></h4>
     <div class="imageholder">
       <img src="{{ item.first_image.url }}" />
       <strong class="PriceContainer">
         <strong class="price">${{ item.price }}</strong>
       </strong>
     </div>
-  </div>
-  <div class="span3">
-    <h4>{{ item.title|trimtitle|safe }}</h4>
   </div>
   <div style="display:none">
     <form id="vote-form" method="POST" action="{% url play %}">{% csrf_token %}
