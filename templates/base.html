@@ -2,28 +2,64 @@
 <html lang="en">
   <head>
     <title>{% block title %}Gems of Craigslist{% endblock %}</title>
+    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+
     {% block head %}{% endblock %}
   </head>
   <body{% block body_id %}{% endblock %}>
-    {% block body %}{% endblock %}
+  <div class="container-narrow">
+    {% block masthead %}
+    <div class="masthead">
+      <ul class="nav nav-pills pull-right">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <h3 class="muted">Gems of Craigslist</h3>
+    </div>
+    <hr>
+    {% endblock %}
+
+    {% block body %}
+    {% endblock %}
     {% block footer %}
-    <footer class="footer" style="position: fixed; bottom: 0; left: 0; right: 0;">
-      <div class="container" style="margin:0 auto;">
-        <div class="span6 offset3">
+    <footer class="footer">
           <ul>
             <li style="display: inline;">&copy;2012 Gems of Craigslist</li>
             <li style="display: inline;">|</li>
             <li style="display: inline;">Lovingly crafted in NYC</li>
           </ul>
-        </div>
-      </div>
     </footer>
     {% endblock %}
+  </div><!-- end of container -->
+
+            <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>
     {% block body_bottom %}{% endblock %}
   </body>
 </html>
