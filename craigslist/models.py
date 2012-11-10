@@ -45,6 +45,13 @@ class Item(models.Model):
     description = models.TextField(null=False)
     post_datetime = models.DateTimeField(null=False)
     price = models.DecimalField(null=True,blank=True,decimal_places=2,max_digits=10)
+    active = models.BooleanField(null=False,default=True)
+    num_views = models.IntegerField(null=False,default=0)
+    num_likes = models.IntegerField(null=False,default=0)
+    num_dislikes = models.IntegerField(null=False,default=0)
+
+    def first_image(self):
+        return self.itemimage_set.all()[0]
 
     def __unicode__(self):
         return u"Item %s" % self.title
