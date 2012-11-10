@@ -7,22 +7,23 @@
 {% endblock %}
 
 {% block body %}
-      <div class="row-fluid">
-        <div class="span6">
-          <div class="imageholder">
-            <img src="{{ STATIC_URL }}img/mcm_orange_chair.jpg" />
-            <strong class="PriceContainer">
-              <strong class="price">$35</strong>
-            </strong>
-          </div>
-        </div>
-        <div class="span6">
-          <a class="btn btn-large btn-success" href="#">Gem</a>
-          <a class="btn btn-large btn-success" href="#">Dud</a>
-        </div>
-      </div>
 
-      <hr>
+<div class="row-fluid">
+  <div class="span9">
+    <div class="imageholder">
+      <img src="{{ STATIC_URL }}img/mcm_orange_chair.jpg" />
+      <strong class="PriceContainer">
+        <strong class="price">$35</strong>
+      </strong>
+    </div>
+  </div>
+  <div class="span3">
+    <a class="btn btn-large btn-success" href="#">Gem</a>
+    <a class="btn btn-large btn-success" href="#">Dud</a>
+  </div>
+</div>
+
+<hr>
 
 <!--
       <div class="row-fluid marketing">
