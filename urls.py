@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^$', 'gemsofcl.views.home', name='home'),
     url(r'^play$', 'gemsofcl.views.play', name='play'),
     url(r'^about$', 'gemsofcl.views.about', name='about'),
+    url(r'^gems$', 'gemsofcl.views.displaygems', name='displaygems'),
     # url(r'^gemsofcl/', include('gemsofcl.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

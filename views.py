@@ -21,3 +21,7 @@ def play(request):
 def about(request):
     c = RequestContext(request, {}, [])
     return render_to_response('about.html', c)
+
+def displaygems(request):
+    c = RequestContext(request, {}, [])
+    return render_to_response('displaygems.html', c)
