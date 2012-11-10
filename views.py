@@ -52,5 +52,7 @@ def about(request):
     return render_to_response('about.html', c)
 
 def displaygems(request):
-    c = RequestContext(request, {}, [])
+    items = Item.objects.all()[:10]
+    c = RequestContext(request, {'items':items}, [])
+    print items
     return render_to_response('displaygems.html', c)
