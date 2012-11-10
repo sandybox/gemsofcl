@@ -9,7 +9,7 @@ class ItemManager(models.Manager):
             print 'Could not get url %s: %s' % (url, str(e))
             return None
 
-        if data:
+        if data and data['sell_price'] and data['images'] and len(data['images']):
             try:
                 item = Item.objects.get(url=url)
                 item.title = data['title']
