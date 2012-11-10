@@ -27,10 +27,8 @@
 
 {% for item in items %}
 <div class="row-fluid item">
-  <div class="span1">
-    <h3>{{ forloop.counter }}.</h3>
-  </div>
-  <div class="span8">
+  <div class="span9">
+    <h4>{{ forloop.counter }}. {{ item.title|trimtitle }} &nbsp;&nbsp;<a href="{{ item.url }}"><img src="{{ STATIC_URL }}img/external_link.png" /></a></h4>
     <div class="imageholder">
       <a href="{{ item.url }}" target="_blank"><img src="{{ item.first_image.url }}" /></a>
       <strong class="PriceContainer">
@@ -39,8 +37,6 @@
     </div>
   </div>
   <div class="span3">
-    <h4>{{ item.title|trimtitle }}</h4>
-    <p><a href="{{ item.url }}"><img src="{{ STATIC_URL }}img/external_link.png" /></a></p>
     <p><img src="{{ STATIC_URL }}img/diamond_sm.png" /> {{ item.rating|percent }}</p>
   </div>
 </div>
