@@ -4,6 +4,9 @@ from BeautifulSoup import BeautifulSoup
 import re
 import dateutil.parser
 
+import logging
+logger = logging.getLogger(__name__)
+
 RE_PRICE = re.compile(r'\$(\d+)')
 RE_EMAIL = re.compile(r'.+@.+\..+')
 
@@ -13,28 +16,28 @@ def parse_url(url):
         soup = BeautifulSoup( r.content )
 
         title = soup.find('h2').text
-        print 'Title: %s' % title
+        logger.debug('Title: %s' % title)
 
         price_matches = RE_PRICE.search(title)
         if price_matches:
             price = price_matches.group(1)
         else:
             price = None
-        print 'Price: %s' % str(price)
+        logger.debug('Price: %s' % str(price))
 
         description = soup.find('div',{'id': 'userbody'}).text
-        print 'Description: %s' % description
+        logger.debug('Description: %s' % description)
 
         post_datetime = soup.find('span', {'class': 'postingdate'}).text.replace('Date: ','')
         post_datetime = dateutil.parser.parse(post_datetime)
         post_datetime = post_datetime.replace(tzinfo=None)
-        print 'Post Datetime: %s' % post_datetime
+        logger.debug('Post Datetime: %s' % post_datetime)
 
         seller_email = None
         for small_tag in soup.find('small'):
             if RE_EMAIL.search(small_tag.text):
                 seller_email = small_tag.text
-        print 'Seller email: %s' % str(seller_email)
+        logger.debug('Seller email: %s' % str(seller_email))
 
         try: # Multiple images
             images = [ img['src'].replace('thumb/','') for img in soup.find('div', {'id': 'iwt'}).findAll('img') ]
@@ -42,9 +45,9 @@ def parse_url(url):
             try:
                 images = [ soup.find('div', {'id': 'ci'}).find('img')['src'] ]
             except:
-                print 'No images'
+                logger.debug('No images')
                 images = []
-        print 'Images: %s' % str(images)
+        logger.debug('Images: %s' % str(images))
 
         return {
             'title' : title,
@@ -55,7 +58,7 @@ def parse_url(url):
             'seller_email' : seller_email,
         }
     else:
-        print 'Error getting %s: %s' % (url, str(r.status_code))
+        logger.debug('Error getting %s: %s' % (url, str(r.status_code)))
 
     return None
 

@@ -1,12 +1,15 @@
 from django.db import models
 from tools import parser
 
+import logging
+logger = logging.getLogger(__name__)
+
 class ItemManager(models.Manager):
     def create_item(self, url):
         try:
             data = parser.parse_url(url)
         except Exception, e:
-            print 'Could not get url %s: %s' % (url, str(e))
+            logger.error('Could not get url %s: %s' % (url, str(e)))
             return None
 
         if data and data['sell_price'] and data['images'] and len(data['images']):

@@ -30,17 +30,17 @@ class Command(BaseCommand):
         listing_ids = []
         for row in rows:
             listing_url = row.find('a')['href']
-            print listing_url
+            logger.info(listing_url)
 
             item = Item.objects.create_item(listing_url)
-            print item
+            logger.info(item)
 
             time.sleep(2)
 
             # m = RE_ITEM_ID.search(listing_link)
             # if m:
             #     listing_id = m.groups(0)[0]
-            #     print listing_id
+            #     logger.info(listing_id)
             #     listing_ids.append(listing_id)
 
         cnt = 0

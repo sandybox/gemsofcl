@@ -7,6 +7,9 @@ from django.conf import settings
 
 from craigslist.models import Item, ItemImage
 
+import logging
+logger = logging.getLogger(__name__)
+
 def home(request):
     if 'countdown' not in request.session:
         request.session['countdown'] = settings.COUNTDOWN_START
@@ -31,19 +34,19 @@ def play(request):
                 raise Exception('No such action!')
             item.save()
         except Exception, e:
-            print 'Could note vote: %s' % str(e)
+            logger.error('Could note vote: %s' % str(e))
 
     item = Item.objects.filter(active=True,price__isnull=False).order_by('?')[1]
 
     if 'countdown' in request.session:
         request.session['countdown'] = request.session['countdown'] - 1 # NEED TO REPLACE TO VAR STORED IN SESSION
-        print "%s hello" % (request.session['countdown'])
+        logger.debug("%s hello" % (request.session['countdown']))
         if request.session['countdown'] == 0:
             request.session['message'] = 'Congratulations! You can now check out the Gems of Craigslist'
             return redirect('displaygems')
     else:
         request.session['countdown'] = settings.COUNTDOWN_START
-        print "starting countdown at %d" % settings.COUNTDOWN_START
+        logger.debug("starting countdown at %d" % settings.COUNTDOWN_START)
 
     c = RequestContext(request, {'item':item,}, [])
     return render_to_response('play.html', c)
