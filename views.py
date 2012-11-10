@@ -34,13 +34,12 @@ def play(request):
 
     item = Item.objects.filter(active=True,price__isnull=False).order_by('?')[1]
 
-    if request.session.get('countdown', False):
+    if 'countdown' in request.session:
         request.session['countdown'] = request.session['countdown'] - 1 # NEED TO REPLACE TO VAR STORED IN SESSION
         print "%s hello" % (request.session['countdown'])
     else:
-        request.session['countdown'] = 10
-        print "starting countdown at 10"
-
+        request.session['countdown'] = settings.COUNTDOWN_START
+        print "starting countdown at %d" % settings.COUNTDOWN_START
 
     c = RequestContext(request, {'item':item,}, [])
     return render_to_response('play.html', c)

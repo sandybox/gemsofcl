@@ -161,6 +161,8 @@ LOGGING = {
     }
 }
 
+COUNTDOWN_START = 10
+
 # Dan need you to do the switch between prod vs local
 BASE_SITE_URL = 'http://127.0.0.1:8000/'
 BASE_SITE_URL_S = BASE_SITE_URL[:-1]
