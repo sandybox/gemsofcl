@@ -63,6 +63,10 @@ p {
     margin-bottom:20px
 }
 
+.heading {
+    font-weight:bold;
+}
+
 .footer {
     color: #999;
     text-align: center;
