@@ -28,7 +28,7 @@ class Command(BaseCommand):
 
         rows = toc.findAll('p',{'class':'row'})
         listing_ids = []
-        for row in rows[:5]:
+        for row in rows:
             listing_url = row.find('a')['href']
             print listing_url
 
