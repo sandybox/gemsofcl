@@ -14,7 +14,6 @@
     {% if request.session.countdown > 0 %}{{ request.session.countdown }} more to go!{% endif %}</p>
 </div>
 
-{% for item in items %}
 <div class="row-fluid">
   <div class="span9">
     <div class="imageholder">
@@ -35,7 +34,6 @@
     </form>
   </div>
 </div>
-{% endfor % }
 
 <hr>
 
