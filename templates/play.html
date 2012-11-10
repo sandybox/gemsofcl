@@ -8,6 +8,10 @@
 
 {% block body %}
 
+<div class="container-narrow">
+  <p><a class="btn btn-large btn-success vote-gem" data-id="{{ item.id }}" href="#">Gem</a>
+    <a class="btn btn-large btn-success vote-dud" data-id="{{ item.id }}" href="#">Dud</a>{{ countdown }} more to go!</p>
+</div>
 <div class="row-fluid">
   <div class="span9">
     <div class="imageholder">
@@ -18,8 +22,7 @@
     </div>
   </div>
   <div class="span3">
-    <a class="btn btn-large btn-success vote-gem" data-id="{{ item.id }}" href="#">Gem</a>
-    <a class="btn btn-large btn-success vote-dud" data-id="{{ item.id }}" href="#">Dud</a>
+    <h4>{{ item.title|safe }}</h4>
   </div>
   <div style="display:none">
     <form id="vote-form" method="POST" action="{% url play %}">{% csrf_token %}
@@ -27,11 +30,6 @@
       <input type="hidden" id="form-action" name="action" value="" />
       <input type="submit" value="Submit" />
     </form>
-  </div>
-</div>
-<div class="row-fluid">
-  <div class="span9">
-    <h4>{{ item.title }}</h4>
   </div>
 </div>
 
