@@ -49,7 +49,12 @@ def play(request):
     if 'countdown' not in request.session:
         request.session['countdown'] = settings.COUNTDOWN_START
 
-    item = Item.objects.filter(active=True,price__isnull=False).order_by('?')[1]
+    try:
+        item = Item.objects.filter(active=True,price__isnull=False).order_by('?')[1]
+    except Exception, e:
+        logger.error('Could not get item: %s' % str(e))
+        item = None
+        request.session['alert'] = 'Sorry! We\'ve run out of items!'
 
     c = RequestContext(request, {'item':item,}, [])
     return render_to_response('play.html', c)
