@@ -9,6 +9,17 @@
 {% block body %}
 <div class="row-fluid">
   <div class="span9">
+    {% for item in items %}
+      <div class="row">
+        <div class="span8">
+          {{ item.title }}
+        </div>
+        <div class="span1">
+          {{ item.rating }}
+        </div>
+      </div>
+    {% endfor %}
+
     <div class="imageholder">
       <img src="{{ item.first_image.url }}" />
       <strong class="PriceContainer">

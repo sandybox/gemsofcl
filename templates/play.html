@@ -11,7 +11,7 @@
 <div class="container-narrow">
   <p><a class="btn btn-large btn-success vote-gem" data-id="{{ item.id }}" href="#">Gem</a>
     <a class="btn btn-large btn-success vote-dud" data-id="{{ item.id }}" href="#">Dud</a>
-    {{ request.session.countdown }} more to go!</p>
+    {% if request.session.countdown > 0 %}{{ request.session.countdown }} more to go!{% endif %}</p>
 </div>
 
 {% for item in items %}
