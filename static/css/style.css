@@ -3,7 +3,9 @@ padding-top: 20px;
 padding-bottom: 40px;
 background:url("../img/cream_dust.png") 0 0 repeat
 }
-
+a {
+    color: #2f8077;
+}
 /* Custom container */
 .container-narrow {
 margin: 0 auto;
@@ -45,6 +47,11 @@ margin-top: 28px;
 .muted.logo > a {
     color: inherit;
     text-decoration: none;
+}
+
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+color: white;
+background-color: #45b8ac;
 }
 
 .item {
