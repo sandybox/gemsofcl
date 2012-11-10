@@ -1,5 +1,7 @@
 {% extends "./base.html" %}
 
+{% load layout %}
+
 {% block title %}Gems of Craigslist - Spot a Gem!{% endblock %}
 
 {% block head %}
@@ -36,7 +38,7 @@
     </div>
   </div>
   <div class="span3">
-    <h4>{{ item.title|safe }}</h4>
+    <h4>{{ item.title|trimtitle|safe }}</h4>
   </div>
   <div style="display:none">
     <form id="vote-form" method="POST" action="{% url play %}">{% csrf_token %}
