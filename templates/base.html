@@ -23,6 +23,7 @@
       <ul class="nav nav-pills pull-right">
         <li class="{% block active_home %}{% endblock %}"><a href="{% url home %}">Home</a></li>
         <li class="{% block active_play %}{% endblock %}"><a href="{% url play %}">Play</a></li>
+        {% if request.session.countdown <= 0 %}<li class="{% block active_displaygems %}{% endblock %}"><a href="{% url displaygems %}">Gems</a></li>{% endif %}
         <li class="{% block active_about %}{% endblock %}"><a href="{% url about %}">About</a></li>
       </ul>
       <h3 class="muted logo"><a href="{% url home %}">Gems of Craigslist</a></h3>
