@@ -5,7 +5,9 @@ from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.conf import settings
 
-from craigslist.models import Item, ItemImage
+from django.core.mail import send_mail
+
+from craigslist.models import Item, ItemImage, Subscriber
 
 import logging
 logger = logging.getLogger(__name__)
@@ -64,6 +66,22 @@ def about(request):
     return render_to_response('about.html', c)
 
 def displaygems(request):
+    if request.method == 'POST':
+        try:
+            email = request.POST.get('email')
+            if '@' in email and '.' in email:
+                subscriber = Subscriber(email=email.lower())
+                subscriber.save()
+                request.session['message'] = 'Thanks for signing up!'
+
+                # Send welcome email
+                send_mail('Welcome to the Gems of Craigslist', 'We\'ll email you the best Craigslist items daily.', 'Gems of Craigslist <team@gemsofcl.com>',
+                    [email.lower()], fail_silently=True)
+
+            else:
+                request.session['alert'] = 'Please enter a valid email address.'
+        except Exception, e:
+            request.session['alert'] = 'Sorry. We were not able to sign you up. Please try again.'
 
     items = Item.objects.filter(active=True,price__isnull=False,num_views__gt=0,num_likes__gt=0).extra(select={ 'rating' : 'num_likes / num_views' }).order_by('-rating')[:10]
     c = RequestContext(request, {'items':items}, [])

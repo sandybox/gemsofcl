@@ -69,3 +69,9 @@ class ItemImage(models.Model):
 
     def __unicode__(self):
         return u"%s" % self.url
+
+class Subscriber(models.Model):
+    email = models.EmailField(null=False,max_length=75)
+
+    def __unicode__(self):
+        return u'%s' % self.email
