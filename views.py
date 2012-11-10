@@ -11,7 +11,7 @@ def home(request):
     return render_to_response('index.html', c)
 
 def play(request):
-    item = Items.objects.filter(active=True).order_by('?')[1]
+    item = Item.objects.filter(active=True,price__isnull=False).order_by('?')[1]
 
     c = RequestContext(request, {'item':item}, [])
     return render_to_response('play.html', c)
