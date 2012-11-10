@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Gems of Craigslist{% endblock %}</title>
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet">
+    {% block head %}{% endblock %}
+  </head>
+  <body{% block body_id %}{% endblock %}>
+    {% block body %}{% endblock %}
+    {% block footer %}
+    <footer class="footer" style="position: fixed; bottom: 0; left: 0; right: 0;">
+      <div class="container" style="margin:0 auto;">
+        <div class="span6 offset3">
+          <ul>
+            <li style="display: inline;">&copy;2012 Gems of Craigslist</li>
+            <li style="display: inline;">|</li>
+            <li style="display: inline;">Lovingly crafted in NYC</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    {% endblock %}
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    {% block body_bottom %}{% endblock %}
+  </body>
+</html>
