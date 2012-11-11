@@ -83,7 +83,7 @@ def displaygems(request):
         except Exception, e:
             request.session['alert'] = 'Sorry. We were not able to sign you up. Please try again.'
 
-    items = Item.objects.filter(active=True,price__isnull=False,num_views__gt=0,num_likes__gt=0).extra(select={ 'rating' : 'num_likes / num_views' }).order_by('-rating')[:10]
+    items = Item.objects.filter(active=True,price__isnull=False,num_views__gte=3,num_likes__gt=0).extra(select={ 'rating' : 'num_likes / num_views' }).order_by('-rating')[:10]
     c = RequestContext(request, {'items':items}, [])
 
     return render_to_response('displaygems.html', c)
