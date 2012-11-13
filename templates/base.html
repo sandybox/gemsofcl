@@ -15,6 +15,15 @@
 
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
 
+   <!-- start Mixpanel --><script type="text/javascript">(function(c,a){window.mixpanel=a;var b,d,h,e;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===c.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.1.min.js';d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d);a._i=[];a.init=function(b,c,f){function d(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?
+g=a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.identify people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.1})(document,window.mixpanel||[]);
+  {% if debug_on %}
+      mixpanel.init("3672b04e5fb49421b3bea85661bc9eb0");
+  {% else %}
+      mixpanel.init("6d585adc446ef236de294722d8d286ed");
+  {% endif %}
+</script><!-- end Mixpanel -->
+
     {% block head %}{% endblock %}
   </head>
   <body{% block body_id %}{% endblock %}>
@@ -23,8 +32,8 @@
     <div class="masthead">
       <ul class="nav nav-pills pull-right">
         <li class="{% block active_home %}{% endblock %}"><a href="{% url home %}">Home</a></li>
-        <li class="{% block active_play %}{% endblock %}"><a href="{% url play %}">Play</a></li>
-        {% if request.session.countdown <= 0 %}<li class="{% block active_displaygems %}{% endblock %}"><a href="{% url displaygems %}">Gems</a></li>{% endif %}
+        <li class="{% block active_play %}{% endblock %}"><a class="play" href="{% url play %}">Play</a></li>
+        {% if request.session.user_type == "return" %}<li class="{% block active_displaygems %}{% endblock %}"><a href="{% url displaygems %}">Gems</a></li>{% endif %}
         <li class="{% block active_about %}{% endblock %}"><a href="{% url about %}">About</a></li>
       </ul>
       <h3 class="muted logo"><a href="{% url home %}">Gems of Craigslist</a></h3>
@@ -78,6 +87,7 @@
     <script src="../assets/js/bootstrap-typeahead.js"></script>
     -->
 
+{% if include_ga %}
     <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-36287535-1']);
@@ -89,6 +99,7 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
     </script>
+({% endif %}
 
     {% block body_bottom %}{% endblock %}
   </body>

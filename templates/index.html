@@ -4,6 +4,15 @@
 
 {% block head %}
 <meta name="description" content="Discover the gems of cragislist.">
+
+<!-- Capture Mixpanel Events -->
+<script type="text/javascript">
+
+mixpanel.track('Viewed Landing', { 'user_type': '{{ request.session.user_type }}' });
+mixpanel.track_links('a.play', 'Play Start', { 'user_type': '{{ request.session.user_type }}' });
+
+</script>
+
 {% endblock %}
 
 {% block active_home %}active{% endblock %}
@@ -12,7 +21,7 @@
       <div class="jumbotron">
         <h1>So, you wanna see only the good stuff for sale on CL?</h1>
         <p class="lead">You gotta give to get. Spot ten diamonds or duds before seeing the real gems for sale on Craigslist today. Hurry before they're gone!</p>
-        <a class="btn btn-large btn-success" href="play">Show me the Gems</a>
+        <a class="btn btn-large btn-success play" href="play">Show me the Gems</a>
       </div>
 
       <hr>

@@ -4,6 +4,9 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+INCLUDE_GA = not DEBUG
+ENV_DEV = True
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -122,6 +125,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     "django.contrib.messages.context_processors.messages",
     'context_processors.message_processor',
+    'context_processors.include_google_analytics',
+    'context_processors.template_debug',
 )
 
 INSTALLED_APPS = (

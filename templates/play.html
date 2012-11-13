@@ -6,6 +6,14 @@
 
 {% block head %}
 <meta name="description" content="Discover the gems of cragislist.">
+
+<!-- Capture Mixpanel Events -->
+<script type="text/javascript">
+
+mixpanel.track('Viewed Item', { 'user_type': '{{ request.session.user_type }}', 'countdown': '{{ request.session.countdown }}' });
+
+</script>
+
 {% endblock %}
 
 {% block active_play %}active{% endblock %}
@@ -22,8 +30,8 @@
     <p>
     {% if request.session.countdown > 5 %}{{ request.session.countdown }} more to go!
     {% elif request.session.countdown > 3 %}Only {{ request.session.countdown }} more!
-    {% elif request.session.countdown > 0 %}{{ request.session.countdown }} left, so close!
-    {% elif request.session.countdown < 1 %}You have earned the right to see the <a href="{% url displaygems %}">gems</a>. But feel free keep playing!
+    {% elif request.session.countdown > 1 %}{{ request.session.countdown }} left, so close!
+    {% elif request.session.countdown == 1 %}Just 1 more!
     {% endif %}
     </p>
   </div>

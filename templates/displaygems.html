@@ -8,6 +8,14 @@
 
 {% block head %}
 <meta name="description" content="Discover the gems of cragislist.">
+
+<!-- Capture Mixpanel Events -->
+<script type="text/javascript">
+
+mixpanel.track("Viewed Display Gems", { 'user_type': '{{ request.session.user_type }}' });
+mixpanel.track_forms("#dailygemform", "Subscribe to Email List");
+
+</script>
 {% endblock %}
 
 {% block body %}
@@ -15,7 +23,7 @@
   <div class="span12">
     <h2>Top 10 Gems</h2>
     <p>Have them emailed to you daily.</p>
-    <form class="form-inline" method="POST" action="{% url displaygems %}">{% csrf_token %}
+    <form id="dailygemform" class="form-inline" method="POST" action="{% url displaygems %}">{% csrf_token %}
       <div class="input-prepend">
         <span class="add-on"><i class="icon-envelope"></i></span>
         <input class="span10" id="inputIcon" type="text" name="email" />

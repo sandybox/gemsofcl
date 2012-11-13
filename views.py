@@ -13,13 +13,21 @@ import logging
 logger = logging.getLogger(__name__)
 
 def home(request):
-    if 'countdown' not in request.session:
-        request.session['countdown'] = settings.COUNTDOWN_START
+
+    if 'user_type' not in request.session:
+        request.session['user_type'] = "new"
 
     c = RequestContext(request, {}, [])
     return render_to_response('index.html', {}, c)
 
 def play(request):
+
+    #Maker sure these variables are set up in the session
+    if 'user_type' not in request.session:
+        request.session['user_type'] = "new"
+    if 'countdown' not in request.session:
+        request.session['countdown'] = settings.COUNTDOWN_START
+
     # Check if this was a vote and track it
     if request.method == 'POST':
         item_id = request.POST.get('item_id')
@@ -38,18 +46,12 @@ def play(request):
         except Exception, e:
             logger.error('Could note vote: %s' % str(e))
 
-        if 'countdown' in request.session:
-            request.session['countdown'] = request.session['countdown'] - 1 # NEED TO REPLACE TO VAR STORED IN SESSION
-            logger.debug("%s hello" % (request.session['countdown']))
-            if request.session['countdown'] == 0:
-                request.session['message'] = 'Congratulations! You can now check out the Gems of Craigslist'
-                return redirect('displaygems')
-        else:
-            request.session['countdown'] = settings.COUNTDOWN_START
-            logger.debug("starting countdown at %d" % settings.COUNTDOWN_START)
-
-    if 'countdown' not in request.session:
-        request.session['countdown'] = settings.COUNTDOWN_START
+        request.session['countdown'] = request.session['countdown'] - 1
+        if request.session['countdown'] <= 0:
+            request.session['user_type'] = "return"
+            request.session['countdown'] = settings.COUNTDOWN_START #restart the game
+            request.session['message'] = 'Congratulations! Check out the Gems of Craigslist.'
+            return redirect('displaygems')
 
     try:
         item = Item.objects.filter(active=True,price__isnull=False).order_by('?')[1]
