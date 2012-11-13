@@ -9,7 +9,7 @@ a {
 /* Custom container */
 .container-narrow {
 margin: 0 auto;
-max-width: 700px;
+max-width: 900px;
 }
 .container-narrow > hr {
 margin: 30px 0;
@@ -54,10 +54,6 @@ color: white;
 background-color: #45b8ac;
 }
 
-.item {
-    margin: 20px 0;
-}
-
 h1 {
     color:#222;
     font-family:"Helvetica Neue", Helvetica, sans-serif;
@@ -97,10 +93,16 @@ p {
 
 /* play page */
 
-.imageholder {
+#PlayCarousel {
+}
+
+.item img {
+    margin: auto;
+}
+
+.item-wrapper {
     position: relative;
-    background-color: white;
-    padding: 15px;
+    margin: 10px 0px;
 }
 
 .PriceContainer {
@@ -117,8 +119,8 @@ p {
     position: absolute;
     z-index: 2;
     top: 19px;
-    left: -28px;
-    width: 125px;
+    left: -60px;
+    width: 200px;
     height: 25px;
     padding-top: 8px;
     text-align: center;
@@ -130,3 +132,18 @@ p {
     -o-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
 }
+
+.thumbnail img {
+    height: 100px;
+}
+
+div.highlightthumb {
+    border: 1px solid #45B8AC;
+}
+
+/* Fix copied from stackoverflow or else thumbnails don't line up after 2nd Bootstrap row-fluid */
+.row-fluid ul.thumbnails li.span12 + li { margin-left : 0px; }
+.row-fluid ul.thumbnails li.span6:nth-child(2n + 3) { margin-left : 0px; }
+.row-fluid ul.thumbnails li.span4:nth-child(3n + 4) { margin-left : 0px; }
+.row-fluid ul.thumbnails li.span3:nth-child(4n + 5) { margin-left : 0px; }
+.row-fluid ul.thumbnails li.span2:nth-child(6n + 7) { margin-left : 0px; }

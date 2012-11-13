@@ -40,21 +40,45 @@ mixpanel.track('Viewed Item', { 'user_type': '{{ request.session.user_type }}', 
 <div class="row-fluid">
   <div class="span12">
     <h4>{{ item.title|trimtitle|safe }}&nbsp;&nbsp;<a href="{{ item.url }}" target="_blank"><img src="{{ STATIC_URL }}img/external_link.png" /></a></h4>
-    <div class="imageholder">
-      <img src="{{ item.first_image.url }}" />
-      <strong class="PriceContainer">
-        <strong class="price">${{ item.price }}</strong>
-      </strong>
+    <div id="PlayCarousel" class="carousel slide">
+      <!-- Carousel items -->
+      <div class="carousel-inner">
+      {% for image in item.itemimage_set.all %}
+          <div class="{% if forloop.counter0 == 0 %}active {% endif %}item" data-id="{{ forloop.counter0 }}">
+            <img src="{{ image.url }}" />
+          </div>
+      {% endfor %}
+      </div>
+      <strong class="PriceContainer"><strong class="price">${{ item.price }}</strong></strong>
+
+      <!-- Carousel nav -->
+      {% if item.itemimage_set.all|length > 1 %}
+      <a class="carousel-control left" href="#PlayCarousel" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#PlayCarousel" data-slide="next">&rsaquo;</a>
+      {% endif %}
     </div>
-  </div>
-  <div style="display:none">
-    <form id="vote-form" method="POST" action="{% url play %}">{% csrf_token %}
-      <input type="hidden" id="form-item-id" name="item_id" value="{{ item.id }}" />
-      <input type="hidden" id="form-action" name="action" value="" />
-      <input type="submit" value="Submit" />
-    </form>
+    <!-- thumbnails -->
+    {% if item.itemimage_set.all|length > 1 %}
+    <ul class="thumbnails">
+      {% for image in item.itemimage_set.all %}
+        <li class="span2">
+          <div class="thumbnail{% if forloop.counter0 == 0 %} highlightthumb{% endif %}" data-id="{{ forloop.counter0 }}"><img src="{{ image.url }}" alt=""></div>
+        </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
   </div>
 </div>
+
+
+<div style="display:none">
+  <form id="vote-form" method="POST" action="{% url play %}">{% csrf_token %}
+    <input type="hidden" id="form-item-id" name="item_id" value="{{ item.id }}" />
+    <input type="hidden" id="form-action" name="action" value="" />
+    <input type="submit" value="Submit" />
+  </form>
+</div>
+
 {% endif %}
 
 <hr>
@@ -64,6 +88,29 @@ mixpanel.track('Viewed Item', { 'user_type': '{{ request.session.user_type }}', 
 {% block body_bottom %}
 <script type="text/javascript">
 $(document).ready( function() {
+
+  // Carousel events
+  $('#PlayCarousel').carousel({
+    interval: false,
+  });
+
+  $('#PlayCarousel').bind('slid', function() {
+    var img_num = $(this).find(".active").attr('data-id');
+    //console.log(img_num);
+    $(".thumbnails").find("[data-id='"+img_num+"']").addClass('highlightthumb');
+  });
+
+  $('#PlayCarousel').bind('slide', function() {
+    $(".thumbnails").find(".highlightthumb").removeClass('highlightthumb');
+  });
+
+  $('.thumbnail').click(function() {
+    var img_num = $(this).attr('data-id');
+    //console.log("Clicked on Thumb: " + img_num)
+    $("#PlayCarousel").carousel(img_num-0);
+  });
+
+  // Form events
   $('.vote-gem').click(function() {
     var item_id = $(this).attr('data-id');
     console.log('Gem ' + item_id);
@@ -78,5 +125,6 @@ $(document).ready( function() {
     $('#vote-form').submit();
   });
 });
+
 </script>
 {% endblock %}
