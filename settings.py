@@ -178,11 +178,16 @@ LOGGING = {
             'level': LOGGER_LEVEL,
             'propagate': True,
         },
+        'gemsofcl': {
+            'handlers': ['console'],
+            'level': LOGGER_LEVEL,
+            'propagate': True,
+        },
         'craigslist': {
             'handlers': ['console'],
             'level': LOGGER_LEVEL,
             'propagate': True,
-        }
+        },
     }
 }
 
