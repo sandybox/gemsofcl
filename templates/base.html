@@ -41,12 +41,14 @@ g=a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview tra
     <hr>
     {% endblock %}
 
+    {% if message or alert %}
     <div class="row-fluid">
       <div class="span9">
         {% if message %}<p>{{ message }}</p>{% endif %}
         {% if alert %}<p>{{ alert }}</p>{% endif %}
       </div>
     </div>
+    {% endif %}
 
     {% block body %}
     {% endblock %}

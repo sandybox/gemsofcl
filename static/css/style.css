@@ -96,6 +96,21 @@ p {
 #PlayCarousel {
 }
 
+.item {
+    border: 1px solid #DDD;
+    padding: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.055);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
 .item img {
     margin: auto;
 }
@@ -139,6 +154,20 @@ p {
 
 div.highlightthumb {
     border: 1px solid #45B8AC;
+}
+
+.vote-gem, .vote-dud {
+    width: 200px;
+}
+
+.votebuttons {
+    text-align: center;
+    color:#BBB;
+    font-family:"Arbutus Bold", Georgia, serif;
+    font-size:15px;
+    font-weight:normal;
+    line-height:20px;
+    margin-bottom:20px
 }
 
 /* Fix copied from stackoverflow or else thumbnails don't line up after 2nd Bootstrap row-fluid */

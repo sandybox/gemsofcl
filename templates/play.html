@@ -22,18 +22,18 @@ mixpanel.track('Viewed Item', { 'user_type': '{{ request.session.user_type }}', 
 
 {% if item %}
 <div class="row-fluid">
-  <div class="span3">
-  <p><a class="btn btn-large btn-success vote-gem" data-id="{{ item.id }}" href="#">Gem</a>
-    <a class="btn btn-large btn-success vote-dud" data-id="{{ item.id }}" href="#">Dud</a></p>
-  </div>
-  <div class="span9">
-    <p>
+  <div class="span12">
+    <div class="votebuttons">
+      <a class="btn btn-large vote-gem" data-id="{{ item.id }}" href="#">Gem</a>
+      <a class="btn btn-large vote-dud" data-id="{{ item.id }}" href="#">Dud</a>
+      <span>&nbsp; &nbsp;
     {% if request.session.countdown > 5 %}{{ request.session.countdown }} more to go!
     {% elif request.session.countdown > 3 %}Only {{ request.session.countdown }} more!
     {% elif request.session.countdown > 1 %}{{ request.session.countdown }} left, so close!
     {% elif request.session.countdown == 1 %}Just 1 more!
     {% endif %}
-    </p>
+    </span>
+    </div>
   </div>
 </div>
 
