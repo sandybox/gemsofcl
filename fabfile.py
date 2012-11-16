@@ -44,6 +44,11 @@ def deploy_web():
         run("ps -ef | grep gunicorn | grep -v grep | awk '{print $2}' | xargs kill -9")
 
 @hosts(env.roledefs['db'])
+def load_items():
+    with virtualenv():
+        run("./manage.py load_items")
+
+@hosts(env.roledefs['db'])
 def get_db():
     sql_file = 'dump_%s.sql' % datetime.datetime.now().strftime('%Y-%m-%d')
     run('mysqldump -u root -p gemsofcl > %s' % sql_file)
