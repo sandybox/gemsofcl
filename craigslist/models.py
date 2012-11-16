@@ -45,10 +45,10 @@ class ItemManager(models.Manager):
 class Item(models.Model):
     objects = ItemManager()
 
-    url = models.URLField(unique=True,max_length=200,null=False)
+    url = models.URLField(unique=True,max_length=200,null=False,db_index=True)
     title = models.CharField(max_length=200,null=False)
     description = models.TextField(null=False)
-    post_datetime = models.DateTimeField(null=False)
+    post_datetime = models.DateTimeField(null=False,db_index=True)
     price = models.DecimalField(null=True,blank=True,decimal_places=2,max_digits=10)
     active = models.BooleanField(null=False,default=True)
     num_views = models.IntegerField(null=False,default=0)
