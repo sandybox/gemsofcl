@@ -46,3 +46,5 @@ __MACOSX
 # Temp Files #
 ##############
 *.*~
+django.pem
+settings_local.py
