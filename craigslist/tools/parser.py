@@ -39,6 +39,14 @@ def parse_url(url):
                 seller_email = small_tag.text
         logger.debug('Seller email: %s' % str(seller_email))
 
+        # extract the location information
+        geo = soup.find(text=re.compile("GeographicArea"))
+        location = ''
+        if geo:
+            logger.debug('Found location %s' % geo)
+            geoKeyVal = [g.strip() for g in geo.split('=')] #a list that looks like ['GeographicArea', 'Summit,  NJ']
+            location = geoKeyVal[1] if geoKeyVal and geoKeyVal.__len__() > 1 else ''
+
         try: # Multiple images
             images = [ img['src'].replace('thumb/','') for img in soup.find('div', {'id': 'iwt'}).findAll('img') ]
         except:
@@ -56,6 +64,7 @@ def parse_url(url):
             'description' : description,
             'images' : images,
             'seller_email' : seller_email,
+            'location' : location,
         }
     else:
         logger.debug('Error getting %s: %s' % (url, str(r.status_code)))
