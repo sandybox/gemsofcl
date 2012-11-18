@@ -12,7 +12,7 @@ class ItemImageInline(admin.TabularInline):
     extra = 3
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('title', 'img')
+    list_display = ('post_datetime', 'title', 'img', 'click_to_url')
 
     def img(self, obj):
         images = obj.itemimage_set.all()
@@ -24,6 +24,12 @@ class ItemAdmin(admin.ModelAdmin):
     img.allow_tags = True
 
     inlines = [ ItemImageInline, ]
+
+    def click_to_url(self, obj):
+        return "<a target='_blank' href='%s'>link</a>" % (obj.url)
+
+    click_to_url.short_description = 'Link'
+    click_to_url.allow_tags = True
 
 # class ItemImageAdmin(admin.ModelAdmin):
 #     list_display = ('item', 'url', 'order', 'img')
