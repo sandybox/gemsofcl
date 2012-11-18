@@ -1,7 +1,8 @@
 body {
 padding-top: 20px;
 padding-bottom: 40px;
-background:url("../img/cream_dust.png") 0 0 repeat
+background-color: #F4F4F4;
+/*background:url("../img/cream_dust.png") 0 0 repeat */
 }
 a {
     color: #2f8077;
@@ -78,8 +79,14 @@ p {
     font-family:Georgia, serif;
     font-size:15px;
     font-weight:normal;
-    line-height:20px;
-    margin-bottom:20px
+}
+
+.small {
+    color:#999;
+    font-family:"Arbutus Bold", Georgia, serif;
+    font-size:12px;
+    font-weight:normal;
+    margin: 10px 0px;
 }
 
 .heading {
@@ -113,6 +120,9 @@ p {
 
 .item img {
     margin: auto;
+    -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .item-wrapper {
@@ -138,9 +148,12 @@ p {
     width: 200px;
     height: 25px;
     padding-top: 8px;
+    color: white;
     text-align: center;
-    font-size: 14px;
-    background-color: #F2F0F0;
+    text-shadow: rgba(0, 0, 0, 0.5) 0px -1px 0px;
+    letter-spacing: 0.15em;
+    font-size: 16px;
+    background-color: #FF4C47;
     overflow: hidden;
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
@@ -176,3 +189,69 @@ div.highlightthumb {
 .row-fluid ul.thumbnails li.span4:nth-child(3n + 4) { margin-left : 0px; }
 .row-fluid ul.thumbnails li.span3:nth-child(4n + 5) { margin-left : 0px; }
 .row-fluid ul.thumbnails li.span2:nth-child(6n + 7) { margin-left : 0px; }
+
+/* Side bar - previous vote result */
+#showavatar {
+width: 100px;
+height: 100px;
+overflow: hidden;
+-webkit-border-bottom-right-radius: 0px;
+-webkit-border-bottom-left-radius: 3px;
+-moz-border-radius-bottomright: 0px;
+-moz-border-radius-bottomleft: 3px;
+border-bottom-right-radius: 0px;
+border-bottom-left-radius: 3px;
+-webkit-border-top-right-radius: 0px;
+-webkit-border-top-left-radius: 3px;
+-moz-border-radius-topright: 0px;
+-moz-border-radius-topleft: 3px;
+border-top-right-radius: 0px;
+border-top-left-radius: 3px;
+padding: 0;
+margin: -10px 15px -10px -10px;
+float: left;
+}
+
+#showusername {
+width: 135px;
+float: left;
+}
+
+#user-info {
+position: relative;
+min-height: 80px;
+overflow: hidden;
+}
+
+
+.card {
+   background-image: none;
+   background-color: #fcfcfc;
+   -moz-box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px;
+   -webkit-box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px;
+   -o-box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px;
+   box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 1px 0px;
+   padding: 10px;
+   border-radius: 3px;
+   min-height: 80px;
+   border-spacing: 0px;
+   color: #333333;
+   font-family:'helvetica neue';
+   font-size: 11pt;
+   line-height: 1.5;
+   border: none;
+   font-weight: normal;
+   text-decoration: initial;
+   text-align: left;
+ }
+
+ .card div a img {
+   border: none;
+   width: 100px;
+   min-height: 100px;
+   border-spacing: 0px;
+   color: #3589a7;
+   font-family:'helvetica neue', 'helvetica neue', helvetica, arial, sans-serif;
+   font-size: 14px;
+   line-height: 22.0;
+ }

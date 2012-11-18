@@ -1,6 +1,7 @@
 {% extends "./base.html" %}
 
 {% load layout %}
+{% load smarttime %}
 
 {% block title %}Gems of Craigslist - Spot a Gem!{% endblock %}
 
@@ -9,9 +10,9 @@
 
 <!-- Capture Mixpanel Events -->
 <script type="text/javascript">
-
 mixpanel.track('Viewed Item', { 'user_type': '{{ request.session.user_type }}', 'countdown': '{{ request.session.countdown }}' });
-
+//mixpanel.track_forms('#vote-form', 'Vote');
+//mixpanel.track_links('a.vote-gem', 'Vote Gem');
 </script>
 
 {% endblock %}
@@ -21,25 +22,28 @@ mixpanel.track('Viewed Item', { 'user_type': '{{ request.session.user_type }}', 
 {% block body %}
 
 {% if item %}
-<div class="row-fluid">
-  <div class="span12">
-    <div class="votebuttons">
-      <a class="btn btn-large vote-gem" data-id="{{ item.id }}" href="#">Gem</a>
-      <a class="btn btn-large vote-dud" data-id="{{ item.id }}" href="#">Dud</a>
-      <span>&nbsp; &nbsp;
-    {% if request.session.countdown > 5 %}{{ request.session.countdown }} more to go!
-    {% elif request.session.countdown > 3 %}Only {{ request.session.countdown }} more!
-    {% elif request.session.countdown > 1 %}{{ request.session.countdown }} left, so close!
-    {% elif request.session.countdown == 1 %}Just 1 more!
-    {% endif %}
-    </span>
-    </div>
-  </div>
+<div class="votebuttons">
+  <a class="btn btn-large vote-gem" data-id="{{ item.id }}" href="#">Gem</a>
+  <a class="btn btn-large vote-dud" data-id="{{ item.id }}" href="#">Dud</a>
+  <span>&nbsp; &nbsp;
+{% if request.session.countdown > 5 %}{{ request.session.countdown }} more to go!
+{% elif request.session.countdown > 3 %}Only {{ request.session.countdown }} more!
+{% elif request.session.countdown > 1 %}{{ request.session.countdown }} left, so close!
+{% elif request.session.countdown == 1 %}Just 1 more!
+{% endif %}
+</span>
 </div>
-
 <div class="row-fluid">
-  <div class="span12">
-    <h4>{{ item.title|trimtitle|safe }}&nbsp;&nbsp;<a href="{{ item.url }}" target="_blank"><img src="{{ STATIC_URL }}img/external_link.png" /></a></h4>
+  <div class="span9">
+    <div class="row-fluid">
+      <div class="span9">
+        <h4>{{ item.title|trimtitle|safe }}&nbsp;&nbsp;<a href="{{ item.url }}" target="_blank"><img src="{{ STATIC_URL }}img/external_link.png" /></a></h4>
+      </div>
+      <div class="span3" style="text-align: right;">
+        <p class="small" style="vertical-align: middle">posted: {{ item.post_datetime|smarttime }} </p>
+      </div>
+    </div>
+
     <div id="PlayCarousel" class="carousel slide">
       <!-- Carousel items -->
       <div class="carousel-inner">
@@ -49,7 +53,7 @@ mixpanel.track('Viewed Item', { 'user_type': '{{ request.session.user_type }}', 
           </div>
       {% endfor %}
       </div>
-      <strong class="PriceContainer"><strong class="price">${{ item.price }}</strong></strong>
+      <strong class="PriceContainer"><strong class="price">${{ item.price|floatformat:"0" }}</strong></strong>
 
       <!-- Carousel nav -->
       {% if item.itemimage_set.all|length > 1 %}
@@ -67,17 +71,32 @@ mixpanel.track('Viewed Item', { 'user_type': '{{ request.session.user_type }}', 
       {% endfor %}
     </ul>
     {% endif %}
-  </div>
-</div>
-
-
-<div style="display:none">
-  <form id="vote-form" method="POST" action="{% url play %}">{% csrf_token %}
-    <input type="hidden" id="form-item-id" name="item_id" value="{{ item.id }}" />
-    <input type="hidden" id="form-action" name="action" value="" />
-    <input type="submit" value="Submit" />
-  </form>
-</div>
+    <div style="display:none">
+      <form id="vote-form" method="POST" action="{% url play %}">{% csrf_token %}
+        <input type="hidden" id="form-item-id" name="item_id" value="{{ item.id }}" />
+        <input type="hidden" id="form-action" name="action" value="" />
+        <input type="submit" value="Vote" />
+      </form>
+    </div>
+  </div><!-- end of span9 -->
+  <div class="span3"><!-- side bar -->
+    {% if prev_item %}
+    <div class="card" id="user-info">
+      <div id="showavatar">
+        <a href=""><img id="user_photo" src="{{ prev_item.first_image.url }}" /></a>
+      </div>
+      <div id="showusername">
+        <h5>Prev Item:</h5>
+        {% if prev_item.num_views > 2 %}
+        <h4><img src="{{ STATIC_URL }}img/diamond_sm.png" /> {{ prev_item.rating|percent }}</h4>
+        {% else %}
+        <p class="small">Not enough votes</p>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+  </div><!-- end of span3 sidebar-->
+</div><!-- end of row-fluid -->
 
 {% endif %}
 

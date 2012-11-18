@@ -62,6 +62,12 @@ class Item(models.Model):
     def first_image(self):
         return self.itemimage_set.all()[0]
 
+    def rating(self):
+        if self.num_views > 0:
+            return float(self.num_likes) / float(self.num_views)
+        else:
+            return None
+
     def __unicode__(self):
         return u"Item %s" % self.title
 

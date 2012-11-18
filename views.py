@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.shortcuts import redirect
 from django.conf import settings
+from datetime import datetime
 
 from django.core.mail import send_mail
 
@@ -29,6 +30,7 @@ def play(request):
         request.session['countdown'] = settings.COUNTDOWN_START
 
     # Check if this was a vote and track it
+    prev_item = None
     if request.method == 'POST':
         item_id = request.POST.get('item_id')
         action  = request.POST.get('action')
@@ -43,6 +45,7 @@ def play(request):
             else:
                 raise Exception('No such action!')
             item.save()
+            prev_item = item
         except Exception, e:
             logger.error('Could note vote: %s' % str(e))
 
@@ -53,14 +56,17 @@ def play(request):
             request.session['message'] = 'Congratulations! Check out the Gems of Craigslist.'
             return redirect('displaygems')
 
+    # Find an item for voting
     try:
+        today = datetime.now().date()
         item = Item.objects.filter(active=True,price__isnull=False).order_by('?')[1]
+        #item = Item.objects.filter(active=True,price__isnull=False, post_datetime__gt = today).order_by('?')[1]
     except Exception, e:
         logger.error('Could not get item: %s' % str(e))
         item = None
         request.session['alert'] = 'Sorry! We\'ve run out of items!'
 
-    c = RequestContext(request, {'item':item,}, [])
+    c = RequestContext(request, {'item':item, 'prev_item': prev_item}, [])
     return render_to_response('play.html', c)
 
 def about(request):
